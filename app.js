@@ -1,6 +1,6 @@
 function converter() {
       let texto = document.getElementById('entrada').value;
-      let linhas = texto.split(/\r?\n/); // separa cada linha
+      let linhas = texto.split(/\r?\n/); // separa por linhas
 
       let convertido = linhas.map(linha => {
         // troca virgula por ponto
@@ -9,8 +9,13 @@ function converter() {
         // se estiver vazio, retorna vazio
         if (num === '') return '';
 
+        // remove o '0.0' do começo
+         if (num.startsWith('0.0')) {
+          num = num.replace(/^0\.0+/, ''); 
+        }
+
         // remove o '0.' do começo
-        if (num.startsWith('0.')){
+        else if (num.startsWith('0.')){
           num = num.replace(/^0./, '');
         }
 
