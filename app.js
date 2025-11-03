@@ -42,9 +42,35 @@ function converter() {
   document.getElementById('saida').textContent = convertido;
 }
 
+function copiarSaida() {
+  const saida = document.getElementById('saida').innerText;
+  const mensagem = document.getElementById('mensagem-copiado');
+
+  if (!saida.trim()) {
+    mensagem.textContent = 'Nada para copiar!';
+    mensagem.style.color = '#e53935';
+    mensagem.classList.add('visivel');
+    setTimeout(() => mensagem.classList.remove('visivel'), 2000);
+    return;
+  }
+
+  navigator.clipboard
+    .writeText(saida)
+    .then(() => {
+      mensagem.textContent = 'Copiado!';
+      mensagem.style.color = '#00c853';
+      mensagem.classList.add('visivel');
+      setTimeout(() => mensagem.classList.remove('visivel'), 2000);
+    })
+    .catch(() => {
+      mensagem.textContent = 'Erro ao copiar!';
+      mensagem.style.color = '#e53935';
+      mensagem.classList.add('visivel');
+      setTimeout(() => mensagem.classList.remove('visivel'), 2000);
+    });
+}
+
 function limpar() {
-  texto = document.getElementById('entrada'); // limpa o campo de texto ou  // texto = document.getElementById('entrada');.value = '';
-  texto.value = '';
-  convertido = document.getElementById('saida'); // limpa o resultado ou  // convertido = document.getElementById('saida').textContent = '';
-  convertido.textContent = '';
+  texto = document.getElementById('entrada').value = '';
+  convertido = document.getElementById('saida').textContent = '';
 }
